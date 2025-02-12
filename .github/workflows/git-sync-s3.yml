@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Change to your default branch if necessary
+      - dev
+      - test
 
 jobs:
   sync-to-s3:
