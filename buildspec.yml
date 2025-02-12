@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9  # Change this if needed
+
+  pre_build:
+    commands:
+      - echo "Cloning all branches..."
+      - git clone --mirror https://github.com/Rakeshsivagouni/git-s3-sync.git repo-mirror
+      - cd repo-mirror
+      - git fetch --all
+
+  build:
+    commands:
+      - echo "Syncing repository to S3..."
+      - aws s3 sync repo-mirror s3://git-s3-sync/repo-mirror --delete
+
+artifacts:
+  files:
+    - "**/*"
